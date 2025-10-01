@@ -1,0 +1,5 @@
+spring:
+  main:
+    banner-mode: log
+  profiles:
+    active: dev
