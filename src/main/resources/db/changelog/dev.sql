@@ -33,3 +33,12 @@ CREATE TABLE users
     email      VARCHAR(255) NOT NULL,
     role       VARCHAR(50)
 );
+
+-- changeset RobertoJavaDev:4
+INSERT INTO users (id, first_name, last_name, email, password, role)
+VALUES (gen_random_uuid(),
+        'Jan',
+        'Administrator',
+        'admin@admin.com',
+        '$2a$12$3nZkpz.KbWCViBA4G0pLr.AyMTmBs5NpmJg6QoKOr2m6bn9drij02',
+        'ROLE_ADMIN');
