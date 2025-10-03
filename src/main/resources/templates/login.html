@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments :: head('Logowanie')}">
+
+</head>
+
+<body class="bg-body-tertiary">
+
+<nav th:replace="~{fragments :: nav}"></nav>
+
+<div class="d-flex mt-lg-5 align-items-center justify-content-center bg-body-tertiary">
+    <div class="container col-xl-10 col-xxl-8 px-4 py-5">
+        <div class="row align-items-center g-lg-5 py-5">
+            <div class="col-lg-7 text-center text-lg-start">
+                <h1 class="display-4 fw-bold lh-1 text-body-emphasis mb-3"><span class="text-primary">CRM</span> Uniwersytetu Kardynała Stefana Wyszyńskiego</h1>
+                <h4 class="fw-light">Wspieraj firmę w zarządzaniu i usprawnianiu relacji z obecnymi i potencjalnymi klientam</h4>
+            </div>
+            <div class="col-md-10 mx-auto col-lg-5">
+                <div th:replace="~{fragments :: toast}"></div>
+                <div class="h4 text-danger text-center" th:if="${param.error}">Niepoprawny login lub hasło</div>
+                <div class="h4" th:if="${param.logout}">Wylogowano</div>
+
+                <form action="/loginproc" method="post" class="p-4 p-md-5  rounded-3 bg-body-tertiary">
+                    <div class="form-floating mb-3">
+                        <input name="username" type="username" class="form-control" id="username" placeholder="name@example.com">
+                        <label for="username">Adres email</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input name="password" type="password" class="form-control" id="password" placeholder="Password">
+                        <label for="password">Hasło</label>
+                    </div>
+                    <button class="w-100 btn btn-lg btn-primary" type="submit">Zaloguj się</button>
+                    <a href="/signup" class="w-100 btn btn-lg btn-primary my-2" type="submit">Utwórz konto</a>
+                    <hr class="my-4">
+                    <small class="text-body-secondary">Założenie konta oznacza akceptację regulaminu</small>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
