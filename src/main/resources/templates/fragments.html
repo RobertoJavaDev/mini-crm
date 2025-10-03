@@ -22,7 +22,7 @@
             <img class="d-inline-block me-3" style="max-height: 3.5em;" src="/images/UKSW_logo.png"
                  alt="logo"/>
         </a>
-        <a sec:authorize="isAuthenticated()" class="navbar-brand" href="/disasters/add">
+        <a sec:authorize="isAuthenticated()" class="navbar-brand" href="/crm/add">
             <img class="d-inline-block me-3" style="max-height: 3.5em;" src="/images/UKSW_logo.png"
                  alt="logo"/>
             <p class="d-inline-block display-6 align-middle">CRM</p>
@@ -38,6 +38,19 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" href="/signup">Rejestracja <i class="bi bi-forward-fill"></i></a>
+                    </li>
+                </ul>
+            </div>
+            <div sec:authorize="isAuthenticated()">
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="/companies/list"><i class="bi bi-list-stars"></i> Sprawdź firmy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="/employees/list"><i class="bi bi-list-stars"></i> Sprawdź pracowników</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="/logout"><i class="bi bi-box-arrow-right"></i> Wyloguj</a>
                     </li>
                 </ul>
             </div>
