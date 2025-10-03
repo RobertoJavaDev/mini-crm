@@ -2,6 +2,10 @@ spring:
   application:
     name: miniCRM
 
+  docker:
+    compose:
+      file: compose-dev.yaml
+
   jpa:
     hibernate:
       ddl-auto: validate
@@ -13,12 +17,12 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://db:5432/minicrmDB
+    url: jdbc:postgresql://localhost:5432/minicrmdb
     username: user
     password: pass
 
   liquibase:
-    change-log: db/changelog-dev.yaml
+    change-log: db/changelog-dev.yml
     contexts: dev
 
   server:
