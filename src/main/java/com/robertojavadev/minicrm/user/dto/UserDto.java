@@ -9,5 +9,5 @@ public record UserDto(UUID id,
                       String lastName,
                       String password,
                       String email,
-                      Role role) {
+                      String role) {
 }

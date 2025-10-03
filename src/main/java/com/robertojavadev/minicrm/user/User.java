@@ -23,7 +23,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
-class User {
+public class User {
 
     @Id
     @UuidGenerator(style = UuidGenerator.Style.AUTO)
