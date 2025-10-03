@@ -18,15 +18,15 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "companies")
-class Company {
+public class Company {
 
     @Id
     @UuidGenerator(style = UuidGenerator.Style.AUTO)
     private UUID id;
 
     @Column(nullable = false)
-    private String name;
+    private String companyName;
     private String email;
-    private String logo;
+    private String logoFilename;
     private String website;
 }

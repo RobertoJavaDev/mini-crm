@@ -35,9 +35,9 @@ class CompanyService {
         Company company = companyRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException(String.format(COMPANY_WITH_ID_DOES_NOT_EXIST, id)));
 
-        company.setName(companyDto.name());
+        company.setCompanyName(companyDto.companyName());
         company.setEmail(companyDto.email());
-        company.setLogo(companyDto.logo());
+        company.setLogoFilename(companyDto.logoFilename());
         company.setWebsite(companyDto.website());
 
         return companyMapper.mapCompanyToCompanyDto(companyRepository.save(company));

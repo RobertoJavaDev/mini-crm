@@ -1,7 +1,7 @@
 package com.robertojavadev.minicrm.company.dto;
 
-public record CompanyAddDto(String name,
+public record CompanyAddDto(String companyName,
                             String email,
-                            String logo,
+                            String logoFilename,
                             String website) {
 }

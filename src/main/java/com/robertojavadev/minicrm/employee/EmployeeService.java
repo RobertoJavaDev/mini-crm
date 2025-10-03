@@ -14,22 +14,22 @@ class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
 
-    public EmployeeDto createEmployee(EmployeeAddDto employeeAddDto) {
-        return employeeRepository.save(employeeAddDto);
-    }
-
-    public EmployeeDto getEmployeeById(UUID id) {
-        return employeeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Employee not found")));
-    }
-
-    public List<EmployeeDto> getAllEmployees() {
-        return employeeRepository.findAll();
-    }
-
-    public EmployeeDto updateEmployee(UUID id) {
-        return employeeRepository.findById(id);
-    }
+//    public EmployeeDto createEmployee(EmployeeAddDto employeeAddDto) {
+//        return employeeRepository.save(employeeAddDto);
+//    }
+//
+//    public EmployeeDto getEmployeeById(UUID id) {
+//        return employeeRepository.findById(id)
+//                .orElseThrow(() -> new RuntimeException("Employee not found")));
+//    }
+//
+//    public List<EmployeeDto> getAllEmployees() {
+//        return employeeRepository.findAll();
+//    }
+//
+//    public EmployeeDto updateEmployee(UUID id) {
+//        return employeeRepository.findById(id);
+//    }
 
     public void deleteEmployee(UUID id) {
         employeeRepository.deleteById(id);
