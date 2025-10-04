@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Dodaj pracownika')}"></head>
+<body class="bg-light">
+<nav th:replace="~{fragments :: nav}"></nav>
+
+<div class="container mt-5">
+    <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-header bg-primary text-white rounded-top-4">
+            <h4 class="mb-0"><i class="bi bi-person-plus me-2"></i>Dodaj nowego pracownika</h4>
+        </div>
+
+        <div class="card-body p-4">
+            <form th:action="@{/employees/add}" th:object="${employeeAddDto}" method="post">
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="firstName" class="form-label fw-semibold">Imię</label>
+                        <input type="text" id="firstName" th:field="*{firstName}" class="form-control"
+                               placeholder="Wpisz imię" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="lastName" class="form-label fw-semibold">Nazwisko</label>
+                        <input type="text" id="lastName" th:field="*{lastName}" class="form-control"
+                               placeholder="Wpisz nazwisko" required>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="company" class="form-label fw-semibold">Firma</label>
+                        <select id="company" th:field="*{company}" class="form-select" required>
+                            <option value="">-- Wybierz firmę --</option>
+                            <option th:each="c : ${companies}" th:value="${c.id}" th:text="${c.companyName}"></option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email" class="form-label fw-semibold">Email</label>
+                        <input type="email" id="email" th:field="*{email}" class="form-control"
+                               placeholder="np. jan.kowalski@firma.pl">
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <label for="phone" class="form-label fw-semibold">Telefon</label>
+                        <input type="text" id="phone" th:field="*{phone}" class="form-control"
+                               placeholder="np. +48123123123">
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                    <a th:href="@{/employees/list}" class="btn btn-outline-secondary me-2">
+                        <i class="bi bi-x-circle"></i> Anuluj
+                    </a>
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-check-circle"></i> Zapisz
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
