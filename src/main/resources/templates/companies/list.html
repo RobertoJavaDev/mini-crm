@@ -17,10 +17,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="company : ${companies}">
-            <td th:text="${company.name}"></td>
+        <<tr th:each="company : ${companies}">
+            <td th:text="${company.companyName}"></td>
             <td th:text="${company.email}"></td>
-            <td><img th:src="@{'/logos/' + ${company.logo}}" alt="logo" style="max-height:50px"/></td>
+            <td><img th:src="@{${company.logoFilename}}" alt="logo" style="max-height:50px"/></td>
             <td><a th:href="@{${company.website}}" th:text="${company.website}" target="_blank"></a></td>
         </tr>
         </tbody>
