@@ -7,6 +7,8 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,11 +30,10 @@ class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public List<CompanyDto> findAllCompanies() {
+    public Page<CompanyDto> findAllCompanies(Pageable pageable) {
         List<Company> companies = companyRepository.findAll();
-        return companies.stream()
-                .map(companyMapper::mapCompanyToCompanyDto)
-                .collect(Collectors.toList());
+        return companyRepository.findAll(pageable)
+                .map(companyMapper::mapCompanyToCompanyDto);
     }
 
     @Override
