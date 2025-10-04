@@ -195,6 +195,6 @@ INSERT INTO employees (id, first_name, last_name, company_id, email, phone)
 VALUES (gen_random_uuid(),
         'Piotr',
         'Lis',
-        (SELECT id FROM companies WHERE company_name = '	Skyline Solutions'),
+        (SELECT id FROM companies WHERE company_name = 'Skyline Solutions'),
         'piotr.lis@skyline.pl',
         '+48 612 345 678');
