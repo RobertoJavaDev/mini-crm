@@ -6,6 +6,8 @@ import com.robertojavadev.minicrm.company.dto.CompanyUpdateDto;
 import jakarta.validation.Valid;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
@@ -22,8 +24,8 @@ public class CompanyFacade {
         return companyService.createCompany(companyAddDto);
     }
 
-    public List<CompanyDto> findAllCompanies() {
-        return companyService.findAllCompanies();
+    public Page<CompanyDto> findAllCompanies(Pageable pageable) {
+        return companyService.findAllCompanies(pageable);
     }
 
     public CompanyDto findCompanyById(@NonNull UUID companyId) {
