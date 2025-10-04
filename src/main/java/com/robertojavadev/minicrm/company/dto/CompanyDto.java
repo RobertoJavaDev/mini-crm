@@ -10,6 +10,7 @@ import java.util.UUID;
 
 public record CompanyDto(
         @NotNull UUID id,
+
         @NotBlank()
         @Size(min = 2, max = 255)
         String companyName,
