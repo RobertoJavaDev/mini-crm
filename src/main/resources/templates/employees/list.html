@@ -1,36 +1,70 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments :: head('Lista pracowników')}"></head>
-<body>
+<body class="bg-light">
 <nav th:replace="~{fragments :: nav}"></nav>
 
-<div class="container mt-4">
-    <h2>Lista pracowników</h2>
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="fw-semibold">Lista pracowników</h2>
+        <a class="btn btn-success shadow-sm" th:href="@{/employees/add}">
+            <i class="bi bi-plus-circle"></i> Dodaj pracownika
+        </a>
+    </div>
 
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Imię</th>
-            <th>Nazwisko</th>
-            <th>Email</th>
-            <th>Telefon</th>
-            <th>Firma</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="employee : ${employees}">
-            <td th:text="${employee.firstName}"></td>
-            <td th:text="${employee.lastName}"></td>
-            <td th:text="${employee.email}"></td>
-            <td th:text="${employee.phone}"></td>
-            <td th:text="${employee.company.companyName}"></td>
-        </tr>
-        </tbody>
-    </table>
-    <nav aria-label="Page navigation">
-        <ul class="pagination">
+    <div class="table-responsive shadow-sm bg-white rounded p-3">
+        <table class="table table-striped align-middle">
+            <thead class="table-light">
+            <tr>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Email</th>
+                <th>Telefon</th>
+                <th>Firma</th>
+                <th class="text-center">Akcje</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="employee : ${employees}">
+                <td th:text="${employee.firstName}"></td>
+                <td th:text="${employee.lastName}"></td>
+                <td>
+                    <a th:href="'mailto:' + ${employee.email}"
+                       th:text="${employee.email}"
+                       class="text-decoration-none text-dark"></a>
+                </td>
+                <td th:text="${employee.phone}"></td>
+                <td th:text="${employee.company.companyName}"></td>
+                <td class="text-center">
+                    <div class="btn-group">
+                        <a th:href="@{'/employees/edit/' + ${employee.id}}"
+                           class="btn btn-outline-warning btn-sm"
+                           title="Edytuj">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <a th:href="@{'/employees/delete/' + ${employee.id}}"
+                           class="btn btn-outline-danger btn-sm"
+                           onclick="return confirm('Czy na pewno chcesz usunąć tego pracownika?')"
+                           title="Usuń">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(employees)}">
+                <td colspan="6" class="text-center text-muted py-3">
+                    Brak pracowników do wyświetlenia.
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <nav aria-label="Paginacja pracowników" class="mt-4">
+        <ul class="pagination justify-content-center">
             <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
-                <a class="page-link" th:href="@{/employees/list(page=${currentPage-1}, size=5)}">Previous</a>
+                <a class="page-link"
+                   th:href="@{/employees/list(page=${currentPage-1}, size=5)}">Poprzednia</a>
             </li>
 
             <li class="page-item"
@@ -42,10 +76,12 @@
             </li>
 
             <li class="page-item" th:classappend="${currentPage == totalPages-1} ? 'disabled'">
-                <a class="page-link" th:href="@{/employees/list(page=${currentPage+1}, size=5)}">Next</a>
+                <a class="page-link"
+                   th:href="@{/employees/list(page=${currentPage+1}, size=5)}">Następna</a>
             </li>
         </ul>
     </nav>
 </div>
+
 </body>
 </html>
