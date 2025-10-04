@@ -10,6 +10,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.UUID;
@@ -89,16 +93,22 @@ class EmployeeFacadeTest {
     @Test
     void shouldReturnAllEmployeesWhenFindAllEmployeesIsCalled() {
         // given
-        when(employeeService.findAllEmployees()).thenReturn(List.of(employeeDto));
+        Pageable pageable = PageRequest.of(0, 5);
+        Page<EmployeeDto> employeePage = new PageImpl<>(List.of(employeeDto), pageable, 1);
+
+        when(employeeService.findAllEmployees(pageable)).thenReturn(employeePage);
 
         // when
-        List<EmployeeDto> result = employeeFacade.findAllEmployees();
+        Page<EmployeeDto> result = employeeFacade.findAllEmployees(pageable);
 
         // then
-        assertThat(result).hasSize(1);
-        assertThat(result.getFirst().id()).isEqualTo(employeeDto.id());
-        assertThat(result.getFirst().company().getCompanyName()).isEqualTo("Test Company");
-        verify(employeeService, times(1)).findAllEmployees();
+        assertThat(result.getContent())
+                .hasSize(1)
+                .first()
+                .extracting(EmployeeDto::id)
+                .isEqualTo(employeeDto.id());
+
+        verify(employeeService, times(1)).findAllEmployees(pageable);
     }
 
     @Test
