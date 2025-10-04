@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Lista firm')}"></head>
+<body>
+<nav th:replace="~{fragments :: nav}"></nav>
+
+<div class="container mt-4">
+    <h2>Lista firm</h2>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Email</th>
+            <th>Logo</th>
+            <th>Strona www</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="company : ${companies}">
+            <td th:text="${company.name}"></td>
+            <td th:text="${company.email}"></td>
+            <td><img th:src="@{'/logos/' + ${company.logo}}" alt="logo" style="max-height:50px"/></td>
+            <td><a th:href="@{${company.website}}" th:text="${company.website}" target="_blank"></a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

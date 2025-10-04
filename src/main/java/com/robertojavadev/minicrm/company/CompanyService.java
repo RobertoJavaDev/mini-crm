@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-class CompanyService {
+public class CompanyService {
 
     public static final String COMPANY_WITH_ID_DOES_NOT_EXIST = "Company with id: %s does not exist";
     private final CompanyRepository companyRepository;

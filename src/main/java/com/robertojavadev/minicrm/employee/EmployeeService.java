@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-class EmployeeService {
+public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
 

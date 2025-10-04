@@ -43,7 +43,7 @@ public class SecurityConfig {
                 )
                 .formLogin(login -> login
                         .loginPage("/").permitAll()
-                        .defaultSuccessUrl("/crm/index")
+                        .defaultSuccessUrl("/crm")
                         .loginProcessingUrl("/loginproc")
                 )
                 .logout(logout -> logout.logoutSuccessUrl("/"))
