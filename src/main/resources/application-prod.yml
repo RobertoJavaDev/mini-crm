@@ -12,7 +12,7 @@ spring:
     show-sql: true
 
   liquibase:
-    change-log: db/changelog-prod.yaml
+    change-log: db/changelog-prod.yml
     contexts: prod
 
 server:
