@@ -9,6 +9,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.UUID;
@@ -72,15 +76,22 @@ class CompanyFacadeTest {
     @Test
     void shouldReturnAllCompaniesWhenFindAllCompaniesIsCalled() {
         // given
-        when(companyService.findAllCompanies()).thenReturn(List.of(companyDto));
+        Pageable pageable = PageRequest.of(0, 5);
+        Page<CompanyDto> companyPage = new PageImpl<>(List.of(companyDto), pageable, 1);
+
+        when(companyService.findAllCompanies(pageable)).thenReturn(companyPage);
 
         // when
-        List<CompanyDto> result = companyFacade.findAllCompanies();
+        Page<CompanyDto> result = companyFacade.findAllCompanies(pageable);
 
         // then
-        assertThat(result).hasSize(1);
-        assertThat(result.getFirst().id()).isEqualTo(companyDto.id());
-        verify(companyService, times(1)).findAllCompanies();
+        assertThat(result.getContent())
+                .hasSize(1)
+                .first()
+                .extracting(CompanyDto::id)
+                .isEqualTo(companyDto.id());
+
+        verify(companyService, times(1)).findAllCompanies(pageable);
     }
 
     @Test
