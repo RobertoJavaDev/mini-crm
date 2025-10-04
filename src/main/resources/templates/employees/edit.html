@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Edytuj pracownika')}"></head>
+<body class="bg-light">
+<nav th:replace="~{fragments :: nav}"></nav>
+
+<div class="container mt-5">
+    <h2>Edytuj pracownika</h2>
+
+    <form th:action="@{'/employees/edit/' + ${employee.id}}" th:object="${employee}" method="post" class="shadow-sm bg-white p-4 rounded">
+        <div class="mb-3">
+            <label class="form-label">Imię *</label>
+            <input type="text" th:field="*{firstName}" class="form-control" required/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Nazwisko *</label>
+            <input type="text" th:field="*{lastName}" class="form-control" required/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Firma *</label>
+            <select th:field="*{company}" class="form-select" required>
+                <option th:each="c : ${companies}" th:value="${c}" th:text="${c.companyName}"
+                        th:selected="${employee.company.id == c.id}"></option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" th:field="*{email}" class="form-control"/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Telefon</label>
+            <input type="text" th:field="*{phone}" class="form-control"/>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <a th:href="@{/employees/list}" class="btn btn-secondary">Powrót</a>
+            <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
