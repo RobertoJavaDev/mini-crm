@@ -2,6 +2,7 @@ package com.robertojavadev.minicrm.company;
 
 import com.robertojavadev.minicrm.company.dto.CompanyAddDto;
 import com.robertojavadev.minicrm.company.dto.CompanyDto;
+import com.robertojavadev.minicrm.company.dto.CompanyUpdateDto;
 import jakarta.validation.Valid;
 import lombok.NonNull;
 import org.springframework.validation.annotation.Validated;
@@ -17,7 +18,7 @@ interface CompanyService {
 
     CompanyDto findCompanyById(@NonNull UUID companyId);
 
-    CompanyDto updateCompany(@NonNull UUID companyId, @NonNull @Valid CompanyDto companyDto);
+    CompanyDto updateCompany(@NonNull UUID companyId, @NonNull @Valid CompanyUpdateDto companyUpdateDto);
 
     void deleteCompanyById(@NonNull UUID companyId);
 }

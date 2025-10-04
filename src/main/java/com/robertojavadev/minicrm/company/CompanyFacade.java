@@ -2,6 +2,7 @@ package com.robertojavadev.minicrm.company;
 
 import com.robertojavadev.minicrm.company.dto.CompanyAddDto;
 import com.robertojavadev.minicrm.company.dto.CompanyDto;
+import com.robertojavadev.minicrm.company.dto.CompanyUpdateDto;
 import jakarta.validation.Valid;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -29,8 +30,8 @@ public class CompanyFacade {
         return companyService.findCompanyById(companyId);
     }
 
-    public CompanyDto updateCompany(@NonNull UUID companyId, @NonNull @Valid CompanyDto companyDto) {
-        return companyService.updateCompany(companyId, companyDto);
+    public CompanyDto updateCompany(@NonNull UUID companyId, @NonNull @Valid CompanyUpdateDto companyUpdateDto) {
+        return companyService.updateCompany(companyId, companyUpdateDto);
     }
 
     public void deleteCompany(@NonNull UUID companyId) {

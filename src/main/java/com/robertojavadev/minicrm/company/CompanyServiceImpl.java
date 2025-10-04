@@ -2,6 +2,7 @@ package com.robertojavadev.minicrm.company;
 
 import com.robertojavadev.minicrm.company.dto.CompanyAddDto;
 import com.robertojavadev.minicrm.company.dto.CompanyDto;
+import com.robertojavadev.minicrm.company.dto.CompanyUpdateDto;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.NonNull;
@@ -41,14 +42,14 @@ class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public CompanyDto updateCompany(@NonNull UUID id, @NonNull @Valid CompanyDto companyDto) {
+    public CompanyDto updateCompany(@NonNull UUID id, @NonNull @Valid CompanyUpdateDto companyUpdateDto) {
         Company company = companyRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(String.format(COMPANY_WITH_ID_DOES_NOT_EXIST, id)));
 
-        company.setCompanyName(companyDto.companyName());
-        company.setEmail(companyDto.email());
-        company.setLogoFilename(companyDto.logoFilename());
-        company.setWebsite(companyDto.website());
+        company.setCompanyName(companyUpdateDto.companyName());
+        company.setEmail(companyUpdateDto.email());
+        company.setLogoFilename(companyUpdateDto.logoFilename());
+        company.setWebsite(companyUpdateDto.website());
 
         return companyMapper.mapCompanyToCompanyDto(companyRepository.save(company));
     }
