@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Lista pracowników')}"></head>
+<body>
+<nav th:replace="~{fragments :: nav}"></nav>
+
+<div class="container mt-4">
+    <h2>Lista pracowników</h2>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Nazwa firmy</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="employee : ${employees}">
+            <td th:text="${employee.name}"></td>
+            <td th:text="${employee.email}"></td>
+            <td><img th:src="@{'/logos/' + ${company.logo}}" alt="logo" style="max-height:50px"/></td>
+            <td><a th:href="@{${company.website}}" th:text="${company.website}" target="_blank"></a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
