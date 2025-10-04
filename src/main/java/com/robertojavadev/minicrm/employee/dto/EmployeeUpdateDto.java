@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-public record EmployeeAddDto(
+public record EmployeeUpdateDto(
         @NotBlank(message = "Imię jest wymagane")
         @Size(max = 100, message = "Imię nie może przekraczać 100 znaków")
         String firstName,

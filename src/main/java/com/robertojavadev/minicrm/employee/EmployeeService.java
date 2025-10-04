@@ -2,36 +2,23 @@ package com.robertojavadev.minicrm.employee;
 
 import com.robertojavadev.minicrm.employee.dto.EmployeeAddDto;
 import com.robertojavadev.minicrm.employee.dto.EmployeeDto;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import com.robertojavadev.minicrm.employee.dto.EmployeeUpdateDto;
+import jakarta.validation.Valid;
+import lombok.NonNull;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 import java.util.UUID;
 
-@Service
-@RequiredArgsConstructor
-public class EmployeeService {
+@Validated
+public interface EmployeeService {
+    EmployeeDto createEmployee(@NonNull @Valid EmployeeAddDto employeeAddDto);
 
-    private final EmployeeRepository employeeRepository;
+    List<EmployeeDto> findAllEmployees();
 
-//    public EmployeeDto createEmployee(EmployeeAddDto employeeAddDto) {
-//        return employeeRepository.save(employeeAddDto);
-//    }
-//
-//    public EmployeeDto getEmployeeById(UUID id) {
-//        return employeeRepository.findById(id)
-//                .orElseThrow(() -> new RuntimeException("Employee not found")));
-//    }
-//
-//    public List<EmployeeDto> getAllEmployees() {
-//        return employeeRepository.findAll();
-//    }
-//
-//    public EmployeeDto updateEmployee(UUID id) {
-//        return employeeRepository.findById(id);
-//    }
+    EmployeeDto findEmployeeById(@NonNull UUID employeeId);
 
-    public void deleteEmployee(UUID id) {
-        employeeRepository.deleteById(id);
-    }
+    EmployeeDto updateEmployee(@NonNull UUID employeeId, @NonNull @Valid EmployeeUpdateDto employeeUpdateDto);
+
+    void deleteEmployeeById(@NonNull UUID employeeId);
 }
