@@ -7,11 +7,11 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -28,11 +28,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<EmployeeDto> findAllEmployees() {
-        List<Employee> employees = employeeRepository.findAll();
-        return employees.stream()
-                .map(employeeMapper::mapEmployeeToEmployeeDto)
-                .collect(Collectors.toList());
+    public Page<EmployeeDto> findAllEmployees(Pageable pageable) {
+        return employeeRepository.findAll(pageable)
+                .map(employeeMapper::mapEmployeeToEmployeeDto);
     }
 
     @Override

@@ -6,10 +6,11 @@ import com.robertojavadev.minicrm.employee.dto.EmployeeUpdateDto;
 import jakarta.validation.Valid;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
-import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -22,8 +23,8 @@ public class EmployeeFacade {
         return employeeService.createEmployee(employeeAddDto);
     }
 
-    public List<EmployeeDto> findAllEmployees() {
-        return employeeService.findAllEmployees();
+    public Page<EmployeeDto> findAllEmployees(Pageable pageable) {
+        return employeeService.findAllEmployees(pageable);
     }
 
     public EmployeeDto findEmployeeById(@NonNull UUID employeeId) {
