@@ -11,15 +11,9 @@ spring:
         format_sql: false
     show-sql: true
 
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://db:5432/minicrmDB
-    username: user
-    password: pass
-
   liquibase:
     change-log: db/changelog-prod.yaml
     contexts: prod
 
-  server:
-    port: ${PORT:8081}
+server:
+  port: ${PORT:8080}
