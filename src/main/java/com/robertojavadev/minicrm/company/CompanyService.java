@@ -1,5 +1,6 @@
 package com.robertojavadev.minicrm.company;
 
+import com.robertojavadev.minicrm.company.dto.CompanyAddDto;
 import com.robertojavadev.minicrm.company.dto.CompanyDto;
 import jakarta.validation.Valid;
 import lombok.NonNull;
@@ -10,7 +11,7 @@ import java.util.UUID;
 
 @Validated
 interface CompanyService {
-    CompanyDto createCompany(@NonNull @Valid CompanyDto companyDto);
+    CompanyDto createCompany(@NonNull @Valid CompanyAddDto companyAddDto);
 
     List<CompanyDto> findAllCompanies();
 

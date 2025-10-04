@@ -1,5 +1,6 @@
 package com.robertojavadev.minicrm.company;
 
+import com.robertojavadev.minicrm.company.dto.CompanyAddDto;
 import com.robertojavadev.minicrm.company.dto.CompanyDto;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
@@ -20,8 +21,8 @@ class CompanyServiceImpl implements CompanyService {
     private final CompanyMapper companyMapper;
 
     @Override
-    public CompanyDto createCompany(@NonNull @Valid CompanyDto companyDto) {
-        Company company = companyMapper.mapCompanyDtoToCompany(companyDto);
+    public CompanyDto createCompany(@NonNull @Valid CompanyAddDto companyAddDto) {
+        Company company = companyMapper.mapCompanyAddDtoToCompany(companyAddDto);
         return companyMapper.mapCompanyToCompanyDto(companyRepository.save(company));
     }
 
