@@ -42,3 +42,60 @@ VALUES (gen_random_uuid(),
         'admin@admin.com',
         '$2a$12$3nZkpz.KbWCViBA4G0pLr.AyMTmBs5NpmJg6QoKOr2m6bn9drij02',
         'ROLE_ADMIN');
+
+-- changeset RobertoJavaDev:5
+INSERT INTO companies (id, company_name, email, logo_filename, website)
+VALUES
+    (gen_random_uuid(),
+     'TechNova Sp. z o.o.',
+     'kontakt@technova.pl',
+     '/uploads/logos/technova.png',
+     'https://www.technova.pl');
+
+INSERT INTO companies (id, company_name, email, logo_filename, website)
+VALUES
+    (gen_random_uuid(),
+     'GreenFuture S.A.',
+     'info@greenfuture.pl',
+     '/uploads/logos/greenfuture.png',
+     'https://www.greenfuture.pl');
+
+INSERT INTO companies (id, company_name, email, logo_filename, website)
+VALUES
+    (gen_random_uuid(),
+     'BlueOcean Tech',
+     'biuro@blueocean.pl',
+     '/uploads/logos/blueocean.png',
+     'https://www.blueocean.pl');
+
+INSERT INTO companies (id, company_name, email, logo_filename, website)
+VALUES
+    (gen_random_uuid(),
+     'NextGen Innovations',
+     'kontakt@nextgen.pl',
+     '/uploads/logos/nextgen.png',
+     'https://www.nextgen.pl');
+
+INSERT INTO companies (id, company_name, email, logo_filename, website)
+VALUES
+    (gen_random_uuid(),
+     'PolSoft Systems',
+     'office@polsoft.pl',
+     '/uploads/logos/polsoft.png',
+     'https://www.polsoft.pl');
+
+INSERT INTO companies (id, company_name, email, logo_filename, website)
+VALUES
+    (gen_random_uuid(),
+     'DataWorks Polska',
+     'support@dataworks.pl',
+     '/uploads/logos/dataworks.png',
+     'https://www.dataworks.pl');
+
+INSERT INTO companies (id, company_name, email, logo_filename, website)
+VALUES
+    (gen_random_uuid(),
+     'Skyline Solutions',
+     'info@skyline.pl',
+     '/uploads/logos/skyline.png',
+     'https://www.skyline.pl');
