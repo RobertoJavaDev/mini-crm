@@ -1,0 +1,60 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: minicrmdb
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: pass
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U user -d minicrmdb"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 25
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '25'
+          cache: maven
+
+      - name: Wait for PostgreSQL to be ready
+        run: |
+          echo "Waiting for PostgreSQL to start..."
+          until pg_isready -h localhost -p 5432 -U user; do
+            sleep 2
+          done
+          echo "PostgreSQL is ready!"
+
+      - name: Build and test with Maven
+        env:
+          SPRING_PROFILES_ACTIVE: dev
+          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/minicrmdb
+          SPRING_DATASOURCE_USERNAME: user
+          SPRING_DATASOURCE_PASSWORD: pass
+        run: mvn clean verify -Dspring.profiles.active=dev
+
+      - name: Archive test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: maven-test-results
+          path: target/surefire-reports/
