@@ -1,34 +1,60 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments :: head('Lista firm')}"></head>
-<body>
+<body class="bg-light">
 <nav th:replace="~{fragments :: nav}"></nav>
 
-<div class="container mt-4">
-    <h2>Lista firm</h2>
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="fw-semibold">Lista firm</h2>
+        <a class="btn btn-success shadow-sm" th:href="@{/companies/add}">
+            <i class="bi bi-plus-circle"></i> Dodaj firmę
+        </a>
+    </div>
 
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Nazwa</th>
-            <th>Email</th>
-            <th>Logo</th>
-            <th>Strona www</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="company : ${companies}">
-            <td th:text="${company.companyName}"></td>
-            <td th:text="${company.email}"></td>
-            <td><img th:src="@{${company.logoFilename}}" alt="logo" style="max-height:50px"/></td>
-            <td><a th:href="@{${company.website}}" th:text="${company.website}" target="_blank"></a></td>
-        </tr>
-        </tbody>
-    </table>
-    <nav aria-label="Page navigation">
-        <ul class="pagination">
+    <div class="table-responsive shadow-sm bg-white rounded p-3">
+        <table class="table table-striped align-middle">
+            <thead class="table-light">
+            <tr>
+                <th>Nazwa</th>
+                <th>Email</th>
+                <th>Logo</th>
+                <th>Strona www</th>
+                <th class="text-center">Akcje</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="company : ${companies}">
+                <td th:text="${company.companyName}"></td>
+                <td th:text="${company.email}"></td>
+                <td>
+                    <img th:src="@{${company.logoFilename}}" alt="logo"
+                         class="img-fluid rounded shadow-sm" style="max-height:50px"/>
+                </td>
+                <td>
+                    <a th:href="@{${company.website}}" th:text="${company.website}"
+                       target="_blank" class="text-decoration-none text-primary"></a>
+                </td>
+                <td class="text-center">
+                    <div class="btn-group">
+                        <a th:href="@{'/companies/edit/' + ${company.id}}" class="btn btn-outline-warning btn-sm">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <a th:href="@{'/companies/delete/' + ${company.id}}" class="btn btn-outline-danger btn-sm"
+                           onclick="return confirm('Czy na pewno chcesz usunąć tę firmę?')">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <nav aria-label="Paginacja firm" class="mt-4">
+        <ul class="pagination justify-content-center">
             <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
-                <a class="page-link" th:href="@{/companies/list(page=${currentPage-1}, size=5)}">Previous</a>
+                <a class="page-link" th:href="@{/companies/list(page=${currentPage-1}, size=5)}">Poprzednia</a>
             </li>
 
             <li class="page-item"
@@ -39,10 +65,11 @@
             </li>
 
             <li class="page-item" th:classappend="${currentPage == totalPages-1} ? 'disabled'">
-                <a class="page-link" th:href="@{/companies/list(page=${currentPage+1}, size=5)}">Next</a>
+                <a class="page-link" th:href="@{/companies/list(page=${currentPage+1}, size=5)}">Następna</a>
             </li>
         </ul>
     </nav>
 </div>
+
 </body>
 </html>
