@@ -99,7 +99,7 @@ INSERT INTO employees (id, first_name, last_name, company_id, email, phone)
 VALUES (gen_random_uuid(),
         'Jan',
         'Kowalski',
-        '2b98ef6c-2b29-47d6-ae6f-6926dfbd286f',
+        (SELECT id FROM companies WHERE company_name = 'TechNova Sp. z o.o.'),
         'jan.kowalski@technova.pl',
         '+48 600 123 456');
 
@@ -107,7 +107,7 @@ INSERT INTO employees (id, first_name, last_name, company_id, email, phone)
 VALUES (gen_random_uuid(),
         'Anna',
         'Nowak',
-        '2b98ef6c-2b29-47d6-ae6f-6926dfbd286f',
+        (SELECT id FROM companies WHERE company_name = 'TechNova Sp. z o.o.'),
         'anna.nowak@technova.pl',
         '+48 601 234 567');
 
@@ -115,7 +115,7 @@ INSERT INTO employees (id, first_name, last_name, company_id, email, phone)
 VALUES (gen_random_uuid(),
         'Tomasz',
         'Wiśniewski',
-        '98085ffd-3150-44d6-aa1c-bf77eae3488c',
+        (SELECT id FROM companies WHERE company_name = 'GreenFuture S.A.'),
         'tomasz.wisniewski@greenfuture.pl',
         '+48 602 345 678');
 
@@ -123,7 +123,7 @@ INSERT INTO employees (id, first_name, last_name, company_id, email, phone)
 VALUES (gen_random_uuid(),
         'Katarzyna',
         'Mazur',
-        '98085ffd-3150-44d6-aa1c-bf77eae3488c',
+        (SELECT id FROM companies WHERE company_name = 'GreenFuture S.A.'),
         'katarzyna.mazur@greenfuture.pl',
         '+48 603 456 789');
 
@@ -131,7 +131,7 @@ INSERT INTO employees (id, first_name, last_name, company_id, email, phone)
 VALUES (gen_random_uuid(),
         'Paweł',
         'Zieliński',
-        '98085ffd-3150-44d6-aa1c-bf77eae3488c',
+        (SELECT id FROM companies WHERE company_name = 'GreenFuture S.A.'),
         'pawel.zielinski@blueocean.pl',
         '+48 604 567 890');
 
@@ -139,7 +139,7 @@ INSERT INTO employees (id, first_name, last_name, company_id, email, phone)
 VALUES (gen_random_uuid(),
         'Monika',
         'Wójcik',
-        'e52746df-7607-425c-b2a1-c2ef9e4fd72a',
+        (SELECT id FROM companies WHERE company_name = 'GreenFuture S.A.'),
         'monika.wojcik@blueocean.pl',
         '+48 605 678 901');
 
@@ -147,7 +147,7 @@ INSERT INTO employees (id, first_name, last_name, company_id, email, phone)
 VALUES (gen_random_uuid(),
         'Marek',
         'Krawczyk',
-        '2e0b7405-3ca7-44fd-b439-161d2084dafc',
+        (SELECT id FROM companies WHERE company_name = 'BlueOcean Tech'),
         'marek.krawczyk@nextgen.pl',
         '+48 606 789 012');
 
@@ -155,7 +155,7 @@ INSERT INTO employees (id, first_name, last_name, company_id, email, phone)
 VALUES (gen_random_uuid(),
         'Alicja',
         'Piotrowska',
-        '2e0b7405-3ca7-44fd-b439-161d2084dafc',
+        (SELECT id FROM companies WHERE company_name = 'NextGen Innovations'),
         'alicja.piotrowska@nextgen.pl',
         '+48 607 890 123');
 
@@ -163,7 +163,7 @@ INSERT INTO employees (id, first_name, last_name, company_id, email, phone)
 VALUES (gen_random_uuid(),
         'Robert',
         'Grabowski',
-        'bebf1c06-c1e9-41af-b485-3c08bad65153',
+        (SELECT id FROM companies WHERE company_name = 'NextGen Innovations'),
         'robert.grabowski@polsoft.pl',
         '+48 608 901 234');
 
@@ -171,7 +171,7 @@ INSERT INTO employees (id, first_name, last_name, company_id, email, phone)
 VALUES (gen_random_uuid(),
         'Ewa',
         'Kubiak',
-        '337376b1-8dce-457b-a0c8-a2db94cc0ea6',
+        (SELECT id FROM companies WHERE company_name = 'NextGen Innovations'),
         'ewa.kubiak@dataworks.pl',
         '+48 609 012 345');
 
@@ -179,7 +179,7 @@ INSERT INTO employees (id, first_name, last_name, company_id, email, phone)
 VALUES (gen_random_uuid(),
         'Michał',
         'Dąbrowski',
-        '337376b1-8dce-457b-a0c8-a2db94cc0ea6',
+        (SELECT id FROM companies WHERE company_name = 'PolSoft Systems'),
         'michal.dabrowski@dataworks.pl',
         '+48 610 123 456');
 
@@ -187,7 +187,7 @@ INSERT INTO employees (id, first_name, last_name, company_id, email, phone)
 VALUES (gen_random_uuid(),
         'Joanna',
         'Czarnecka',
-        '1b178163-1215-4ce3-9a14-5cf5b00018fd',
+        (SELECT id FROM companies WHERE company_name = 'DataWorks Polska'),
         'joanna.czarnecka@skyline.pl',
         '+48 611 234 567');
 
@@ -195,6 +195,6 @@ INSERT INTO employees (id, first_name, last_name, company_id, email, phone)
 VALUES (gen_random_uuid(),
         'Piotr',
         'Lis',
-        '1b178163-1215-4ce3-9a14-5cf5b00018fd',
+        (SELECT id FROM companies WHERE company_name = '	Skyline Solutions'),
         'piotr.lis@skyline.pl',
         '+48 612 345 678');
