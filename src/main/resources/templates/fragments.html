@@ -18,14 +18,13 @@
 <nav th:fragment="nav" class="navbar navbar-expand-lg navbar-light"
      style="background-color: #e9ecef;" aria-label="First navbar example">
     <div class="container-fluid">
-        <a sec:authorize="isAnonymous()" class="navbar-brand" href="/">
-            <img class="d-inline-block me-3" style="max-height: 3.5em;" src="/images/UKSW_logo.png"
-                 alt="logo"/>
+        <a sec:authorize="isAnonymous()" class="navbar-brand" th:href="@{/}">
+            <img class="d-inline-block me-3" style="max-height: 3.5em;" src="/images/UKSW_logo.png" alt="logo"/>
         </a>
-        <a sec:authorize="isAuthenticated()" class="navbar-brand" href="/crm/add">
-            <img class="d-inline-block me-3" style="max-height: 3.5em;" src="/images/UKSW_logo.png"
-                 alt="logo"/>
-            <p class="d-inline-block display-6 align-middle">Customer Relationship Management</p>
+
+        <a sec:authorize="isAuthenticated()" class="navbar-brand d-flex align-items-center" th:href="@{/crm}">
+            <img class="d-inline-block me-3" style="max-height: 3.5em;" src="/images/UKSW_logo.png" alt="logo"/>
+            <span class="fs-4 fw-semibold text-dark mb-0">Customer Relationship Management</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
