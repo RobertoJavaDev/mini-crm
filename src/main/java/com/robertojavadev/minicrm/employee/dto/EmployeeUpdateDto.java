@@ -24,7 +24,7 @@ public record EmployeeUpdateDto(
         String email,
 
         @Pattern(
-                regexp = "^(\\+48)?\\d{9}$",
+                regexp = "^(|\\+48\\d{9}|\\d{9})$",
                 message = "Nieprawidłowy format numeru telefonu"
         )
         String phone

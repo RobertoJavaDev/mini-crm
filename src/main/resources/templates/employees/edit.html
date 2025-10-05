@@ -21,8 +21,11 @@
         <div class="mb-3">
             <label class="form-label">Firma *</label>
             <select th:field="*{company}" class="form-select" required>
-                <option th:each="c : ${companies}" th:value="${c}" th:text="${c.companyName}"
-                        th:selected="${employee.company.id == c.id}"></option>
+                <option th:each="c : ${companies}"
+                        th:value="${c.id}"
+                        th:text="${c.companyName}"
+                        th:selected="${employee.company.id == c.id}">
+                </option>
             </select>
         </div>
 
