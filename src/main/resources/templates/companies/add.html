@@ -18,15 +18,19 @@
                 <div class="mb-3">
                     <label class="form-label">Email</label>
                     <input type="email" th:field="*{email}" class="form-control">
+                    <small class="text-muted">Pole opcjonalne</small>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Ścieżka do logo</label>
                     <input type="text" th:field="*{logoFilename}" class="form-control"
                            placeholder="/uploads/logos/logo.png">
+                    <small class="text-muted">Pole opcjonalne</small>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Strona www</label>
-                    <input type="url" th:field="*{website}" class="form-control" placeholder="https://www.example.pl">
+                    <input type="url" th:field="*{website}" class="form-control"
+                           placeholder="https://www.example.pl">
+                    <small class="text-muted">Pole opcjonalne</small>
                 </div>
                 <div class="d-flex justify-content-end">
                     <a th:href="@{/companies/list}" class="btn btn-secondary me-2">Anuluj</a>
