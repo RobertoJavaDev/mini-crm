@@ -18,7 +18,7 @@ public record CompanyUpdateDto(
         String logoFilename,
 
         @Pattern(
-                regexp = "^(https?://)?([\\w.-]+)\\.([a-z]{2,})([/\\w .-]*)*/?$",
+                regexp = "^(|https?://[\\w.-]+\\.[a-z]{2,}([/\\w .-]*)*/?)$",
                 message = "Podaj poprawny adres strony internetowej"
         )
         @Size(max = 255)
