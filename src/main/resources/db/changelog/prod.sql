@@ -202,3 +202,18 @@ VALUES (gen_random_uuid(),
 -- changeset RobertoJavaDev:7
 DELETE FROM employees
 WHERE email = 'piotr.lis@skyline.pl';
+
+-- changeset RobertoJavaDev:8
+INSERT INTO companies (id, company_name, email, logo_filename, website)
+VALUES (gen_random_uuid(),
+        'DataWorks Polska',
+        'support@dataworks.pl',
+        '/uploads/logos/dataworks.png',
+        'https://www.dataworks.pl');
+
+INSERT INTO companies (id, company_name, email, logo_filename, website)
+VALUES (gen_random_uuid(),
+        'Skyline Solutions',
+        'info@skyline.pl',
+        '/uploads/logos/skyline.png',
+        'https://www.skyline.pl');
