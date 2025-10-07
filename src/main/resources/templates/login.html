@@ -18,7 +18,7 @@
             </div>
             <div class="col-md-10 mx-auto col-lg-5">
                 <div th:replace="~{fragments :: toast}"></div>
-                <div class="h4 text-danger text-center" th:if="${param.error}">Niepoprawny login lub hasło</div>
+                <div class="h4 text-danger text-center" th:if="${loginErrorMessage}" th:text="${loginErrorMessage}"></div>
                 <div class="h4" th:if="${param.logout}">Wylogowano</div>
 
                 <form action="/loginproc" method="post" class="p-4 p-md-5  rounded-3 bg-body-tertiary">
