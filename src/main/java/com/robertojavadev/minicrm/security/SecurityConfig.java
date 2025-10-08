@@ -18,6 +18,7 @@ public class SecurityConfig {
     private final CustomUserDetailService userDetailsService;
     private final CustomPasswordEncoder passwordEncoder;
     private final CustomAuthenticationFailureHandler failureHandler;
+    private final CustomAuthenticationSuccessHandler successHandler;
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
@@ -46,6 +47,7 @@ public class SecurityConfig {
                         .loginPage("/").permitAll()
                         .defaultSuccessUrl("/crm")
                         .loginProcessingUrl("/loginproc")
+                        .successHandler(successHandler)
                         .failureHandler(failureHandler)
                 )
                 .logout(logout -> logout.logoutSuccessUrl("/"))
