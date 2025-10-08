@@ -37,6 +37,5 @@ class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureH
 
         request.getSession().setAttribute("loginErrorMessage", "Niepoprawny login lub hasło");
         response.sendRedirect("/");
-
     }
 }
