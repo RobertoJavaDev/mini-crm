@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.UUID;
 
@@ -51,7 +52,13 @@ public class CompanyViewController {
     }
 
     @PostMapping("/add")
-    public String createCompany(@ModelAttribute("company") @Valid CompanyAddDto companyAddDto) {
+    public String createCompany(@RequestParam("companyName") String companyName,
+                                @RequestParam("email") String email,
+                                @RequestParam("website") String website,
+                                @RequestParam("logoFile") MultipartFile logoFile) {
+        String logoFilename = companyFacade.uploadLogo(logoFile);
+
+        CompanyAddDto companyAddDto = new CompanyAddDto(companyName, email, logoFilename, website);
         companyFacade.createCompany(companyAddDto);
         return "redirect:/companies/list";
     }
@@ -65,7 +72,21 @@ public class CompanyViewController {
 
     @PostMapping("/edit/{id}")
     public String updateCompany(@PathVariable UUID id,
-                                @ModelAttribute("company") @Valid CompanyUpdateDto companyUpdateDto) {
+                                @RequestParam("companyName") String companyName,
+                                @RequestParam("email") String email,
+                                @RequestParam("website") String website,
+                                @RequestParam(value = "logoFile", required = false) MultipartFile logoFile) {
+
+        CompanyDto existingCompany = companyFacade.findCompanyById(id);
+        String logoFilename = existingCompany.logoFilename();
+
+        if (logoFile != null && !logoFile.isEmpty()) {
+            logoFilename = companyFacade.uploadLogo(logoFile);
+        }
+
+        CompanyUpdateDto companyUpdateDto =
+                new CompanyUpdateDto(companyName, email, logoFilename, website);
+
         companyFacade.updateCompany(id, companyUpdateDto);
         return "redirect:/companies/list";
     }
