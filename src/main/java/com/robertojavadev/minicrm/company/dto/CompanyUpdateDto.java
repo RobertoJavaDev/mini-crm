@@ -1,6 +1,5 @@
 package com.robertojavadev.minicrm.company.dto;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -10,7 +9,10 @@ public record CompanyUpdateDto(
         @Size(min = 2, max = 255)
         String companyName,
 
-        @Email()
+        @Pattern(
+                regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$",
+                message = "Podaj poprawny adres e-mail (np. jan.kowalski@example.com)"
+        )
         @Size(max = 255)
         String email,
 

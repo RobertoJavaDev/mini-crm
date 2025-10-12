@@ -15,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.UUID;
 
 @Component
-@Validated
 @RequiredArgsConstructor
 public class CompanyFacade {
     private final CompanyService companyService;

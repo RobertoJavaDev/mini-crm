@@ -14,16 +14,19 @@
                 <div class="mb-3">
                     <label class="form-label">Nazwa firmy</label>
                     <input type="text" th:field="*{companyName}" class="form-control" required>
+                    <div class="text-danger" th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}"></div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Email</label>
                     <input type="email" th:field="*{email}" class="form-control">
+                    <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
                     <small class="text-muted">Pole opcjonalne</small>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Logo firmy</label>
                     <input type="file" name="logoFile" class="form-control" accept="image/*">
                     <small class="text-muted">Plik JPG, PNG, min. 100x100 px</small>
+                    <div class="text-danger" th:if="${logoError}" th:text="${logoError}"></div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Strona www</label>
