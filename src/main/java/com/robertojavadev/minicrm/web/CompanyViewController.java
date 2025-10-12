@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,14 +53,33 @@ public class CompanyViewController {
     }
 
     @PostMapping("/add")
-    public String createCompany(@RequestParam("companyName") String companyName,
-                                @RequestParam("email") String email,
-                                @RequestParam("website") String website,
-                                @RequestParam("logoFile") MultipartFile logoFile) {
-        String logoFilename = companyFacade.uploadLogo(logoFile);
+    public String createCompany(@ModelAttribute("company") @Valid CompanyAddDto companyAddDto,
+                                BindingResult result,
+                                @RequestParam("logoFile") MultipartFile logoFile,
+                                Model model) {
 
-        CompanyAddDto companyAddDto = new CompanyAddDto(companyName, email, logoFilename, website);
-        companyFacade.createCompany(companyAddDto);
+        if (result.hasErrors()) {
+            return "companies/add";
+        }
+
+        String logoFilename = null;
+        if (logoFile != null && !logoFile.isEmpty()) {
+            try {
+                logoFilename = companyFacade.uploadLogo(logoFile);
+            } catch (IllegalArgumentException | IllegalStateException ex) {
+                model.addAttribute("logoError", ex.getMessage());
+                return "companies/add";
+            }
+        }
+
+        CompanyAddDto companyToSave = new CompanyAddDto(
+                companyAddDto.companyName(),
+                companyAddDto.email(),
+                logoFilename,
+                companyAddDto.website()
+        );
+
+        companyFacade.createCompany(companyToSave);
         return "redirect:/companies/list";
     }
 
