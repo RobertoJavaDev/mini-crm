@@ -72,7 +72,21 @@ public class CompanyViewController {
 
     @PostMapping("/edit/{id}")
     public String updateCompany(@PathVariable UUID id,
-                                @ModelAttribute("company") @Valid CompanyUpdateDto companyUpdateDto) {
+                                @RequestParam("companyName") String companyName,
+                                @RequestParam("email") String email,
+                                @RequestParam("website") String website,
+                                @RequestParam(value = "logoFile", required = false) MultipartFile logoFile) {
+
+        CompanyDto existingCompany = companyFacade.findCompanyById(id);
+        String logoFilename = existingCompany.logoFilename();
+
+        if (logoFile != null && !logoFile.isEmpty()) {
+            logoFilename = companyFacade.uploadLogo(logoFile);
+        }
+
+        CompanyUpdateDto companyUpdateDto =
+                new CompanyUpdateDto(companyName, email, logoFilename, website);
+
         companyFacade.updateCompany(id, companyUpdateDto);
         return "redirect:/companies/list";
     }
