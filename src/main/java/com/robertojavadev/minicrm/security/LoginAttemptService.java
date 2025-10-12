@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 class LoginAttemptService {
-    private static final int MAX_ATTEMPTS = 5;
+    private static final int MAX_ATTEMPTS = 3;
     private static final long LOCK_TIME_MINUTES = 3;
 
     private final Map<String, Integer> attemptsCache = new ConcurrentHashMap<>();
