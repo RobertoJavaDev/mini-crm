@@ -10,30 +10,37 @@
             <h4 class="mb-0"><i class="bi bi-pencil"></i> Edytuj dane firmy</h4>
         </div>
         <div class="card-body">
-            <form th:action="@{'/companies/edit/' + ${company.id}}" method="post" enctype="multipart/form-data">
-                <div class="mb-3">
+            <form th:action="@{'/companies/edit/' + ${id}}" th:object="${company}" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
                     <label class="form-label">Nazwa firmy</label>
-                    <input type="text" name="companyName" th:value="${company.companyName}" class="form-control" required>
+                    <input type="text" th:field="*{companyName}" class="form-control" required>
+                    <div class="text-danger" th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}"></div>
                 </div>
+
                 <div class="mb-3">
                     <label class="form-label">Email</label>
-                    <input type="email" name="email" th:value="${company.email}" class="form-control">
+                    <input type="email" th:field="*{email}" class="form-control">
+                    <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
                     <small class="text-muted">Pole opcjonalne</small>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Aktualne logo</label><br>
-                    <img th:src="@{${company.logoFilename}}" alt="logo" class="img-thumbnail mb-2" style="max-height: 80px;">
+                    <img th:if="${company.logoFilename}" th:src="@{${company.logoFilename}}" alt="logo"
+                         class="img-thumbnail mb-2" style="max-height: 100px;">
                     <input type="file" name="logoFile" class="form-control mt-2" accept="image/*">
+                    <div class="text-danger" th:if="${logoError}" th:text="${logoError}"></div>
                     <small class="text-muted">Jeśli nie wybierzesz pliku, pozostanie aktualne logo.</small>
-                    <small class="text-muted">Pole opcjonalne</small>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Strona www</label>
-                    <input type="url" name="website" th:value="${company.website}" class="form-control">
+                    <input type="url" th:field="*{website}" class="form-control" placeholder="https://www.example.pl">
+                    <div class="text-danger" th:if="${#fields.hasErrors('website')}" th:errors="*{website}"></div>
                     <small class="text-muted">Pole opcjonalne</small>
                 </div>
+
+
                 <div class="d-flex justify-content-end">
                     <a th:href="@{/companies/list}" class="btn btn-secondary me-2">Anuluj</a>
                     <button type="submit" class="btn btn-warning">Zapisz zmiany</button>

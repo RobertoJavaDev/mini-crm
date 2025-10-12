@@ -92,22 +92,36 @@ public class CompanyViewController {
 
     @PostMapping("/edit/{id}")
     public String updateCompany(@PathVariable UUID id,
-                                @RequestParam("companyName") String companyName,
-                                @RequestParam("email") String email,
-                                @RequestParam("website") String website,
-                                @RequestParam(value = "logoFile", required = false) MultipartFile logoFile) {
+                                @ModelAttribute("company") @Valid CompanyUpdateDto companyUpdateDto,
+                                BindingResult result,
+                                @RequestParam(value = "logoFile", required = false) MultipartFile logoFile,
+                                Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("id", id);
+            return "companies/edit";
+        }
 
         CompanyDto existingCompany = companyFacade.findCompanyById(id);
         String logoFilename = existingCompany.logoFilename();
 
         if (logoFile != null && !logoFile.isEmpty()) {
-            logoFilename = companyFacade.uploadLogo(logoFile);
+            try {
+                logoFilename = companyFacade.uploadLogo(logoFile);
+            } catch (IllegalArgumentException | IllegalStateException ex) {
+                model.addAttribute("logoError", ex.getMessage());
+                model.addAttribute("id", id);
+                return "companies/edit";
+            }
         }
 
-        CompanyUpdateDto companyUpdateDto =
-                new CompanyUpdateDto(companyName, email, logoFilename, website);
+        CompanyUpdateDto updatedCompany = new CompanyUpdateDto(
+                companyUpdateDto.companyName(),
+                companyUpdateDto.email(),
+                logoFilename,
+                companyUpdateDto.website()
+        );
 
-        companyFacade.updateCompany(id, companyUpdateDto);
+        companyFacade.updateCompany(id, updatedCompany);
         return "redirect:/companies/list";
     }
 
